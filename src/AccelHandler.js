@@ -4,15 +4,26 @@
  * @author Kazuya Hiruma
  * @email edo.m18@gmail.com
  */
+
+/**
+ * AccelHandler class.
+ * @constructor
+ * @param {Element} element
+ * @param {?function} callback
+ */
 function AccelHandler (element, callback) {
     this.element_ = element;
     this.callback_ = callback || function (pos) {};
     this.init();
 }
 
-//Ariase to prototype.
+//Alias to prototype.
 AccelHandler.fn = AccelHandler.prototype;
 
+
+/**
+ * Initialize
+ */
 AccelHandler.fn.init = function () {
     this.moving_ = false;
     this.prevAcc_ = 0;
@@ -29,16 +40,31 @@ AccelHandler.fn.init = function () {
                           function (func) { setTimeout(func, 32) };
 };
 
+
+/**
+ * Trigger the moving event.
+ * @param {number} pos
+ */
 AccelHandler.fn.move = function (pos) {
     this.callback_(pos);
 };
 
+
+/**
+ * Start event handler.
+ * @param {Event} e
+ */
 AccelHandler.fn.start_ = function (e) {
     this.moving_  = true;
     this.prevPos_ = e.clientY;
     this.prevT_   = +new Date();
 };
 
+
+/**
+ * End event handler.
+ * @param {Event} e
+ */
 AccelHandler.fn.end_ = function (e) {
 
     this.moving_ = false;
@@ -66,6 +92,11 @@ AccelHandler.fn.end_ = function (e) {
     loop();
 };
 
+
+/**
+ * Move event handler.
+ * @param {Event} e
+ */
 AccelHandler.fn.move_ = function (e) {
 
     if (!this.moving_) {
