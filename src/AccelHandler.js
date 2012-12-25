@@ -107,34 +107,34 @@ AccelHandler.fn.move_ = function (e) {
         now = +new Date(),
 
         //Time delta.
-        t   = now - this.prevT_,
+        t = now - this.prevT_,
 
         //Calculate distance.
-        dist = y - this.prevPos_,
+        d = y - this.prevPos_,
 
         //Calculate current velocity.
-        v = dist / (t || (t = 1)),
+        v = d / (t || (t = 1)),
 
-        //Calculate accelaration.
-        acc  = (v - this.v_) / t;
+        //Calculate current accelaration.
+        acc  = (v - this.prevV_) / t;
 
 
-    //add accelaration.
+    //Add an accelaration.
     this.acc_ += acc;
 
-    //Keep current time to prevTime.
+    //Keep current time.
     this.prevT_ = now;
 
-    //Keep current accelaration to prev accelaration.
-    this.prevAcc_ = this.acc_;
-
-    //Keep y position to prev y.
+    //Keep current y position.
     this.prev_ = y;
 
+    //Keep current velocity.
+    this.prevV_ = v;
+
     //Keep and calculate velocity.
-    this.v_     = v * t;
+    this.v_ = this.acc_ * t;
 
     //scrolling.
-    this.pos_ -= dist;
+    this.pos_ -= d;
     this.move(this.pos_);
 };
