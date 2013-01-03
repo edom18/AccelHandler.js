@@ -7,7 +7,7 @@ module.exports = function (grunt) {
             tasks: 'min'
         },
         min: {
-            '../src/AccelHandler.js': ['js/AccelHandler.min.js']
+            'js/AccelHandler.min.js': ['../src/AccelHandler.js']
         }
     });
 
